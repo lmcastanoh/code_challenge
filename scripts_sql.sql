@@ -5,5 +5,5 @@ CREATE TABLE hired_employees (id int, name char(100), datetime varchar(50), depa
 CREATE TABLE departments (id int,department char(100));
 CREATE TABLE jobs (id int,job char(100));
 
-1kyoHA"1&.V~,-Gc
+
 
