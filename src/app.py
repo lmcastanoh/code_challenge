@@ -1,22 +1,31 @@
-from flask import Flask
+from flask import Flask,request
 from flask_mysqldb import MySQL
 import pymysql
 import pandas as pd
 from sqlalchemy import create_engine
 import sqlalchemy
+import requests
+import urllib.request
+import json
+
+class AppURLopener(urllib.request.FancyURLopener):
+    version = "Mozilla/5.0"
+
+opener = AppURLopener()
+response = opener.open('http://httpbin.org/user-agent')
 
 app = Flask(__name__)
 
 # create sqlalchemy engine
-engine = create_engine("mysql+pymysql://{user}:{pw}@34.71.99.112/{db}"
+engine = create_engine("mysql+pymysql://{user}:{pw}@35.227.33.191/{db}"
                        .format(user="root",
-                               pw="123456789",
+                               pw='1kyoHA"1&.V~,-Gc',
                                db="code_challenge"))
 
 #contexion=MySQL(app)
 
-cnx = pymysql.connect(user='root', password='123456789', host='34.71.99.112', database='code_challenge')
-cursor = cnx.cursor()
+#cnx = pymysql.connect(user='root', password='123456789', host='34.71.99.112', database='code_challenge')
+#cursor = cnx.cursor()
 
 
 @app.route('/')
@@ -25,7 +34,7 @@ def prueba():
 
     url1 = 'https://drive.google.com/uc?id=1EETspcs5JiotdMxmK32naqVcz3dS03Qy'
     hired_employees = pd.read_csv(url1,header=None)
-    hired_employees = pd.DataFrame(hired_employees)
+    #hired_employees = pd.DataFrame(hired_employees)
     hired_employees.columns = ['id','name','datetime','department_id','job_id']
     hired_employees['id'] = hired_employees['id'].fillna(0)
     hired_employees['name'] = hired_employees['name'].fillna('')
@@ -35,14 +44,14 @@ def prueba():
 
     url2 = 'https://drive.google.com/uc?id=1Z_iMmyJsxiDvr5T0KW9pXBrtqz96BrBG'
     departments = pd.read_csv(url2,header=None)
-    departments = pd.DataFrame(departments)
+    #departments = pd.DataFrame(departments)
     departments.columns = ['id','department']
     departments['id'] = departments['id'].fillna(0)
     departments['department'] = departments['department'].fillna('')
 
     url3 = 'https://drive.google.com/uc?id=1806a7U-HTDSoIMycNOnw5ldC3Gud00li'
     jobs = pd.read_csv(url3,header=None)
-    jobs = pd.DataFrame(jobs)
+    #jobs = pd.DataFrame(jobs)
     jobs.columns = ['id','job']
     jobs['id'] = jobs['id'].fillna(0)
     jobs['job'] = jobs['job'].fillna('')
